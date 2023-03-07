@@ -41,8 +41,13 @@ namespace Sandboxa
             else if (args[0].Contains("?"))
             {
 
-                Console.WriteLine("Sandboxa Help Screen\n---------------------------------------------------------------\nBy default all permissions are disabled. Use flags as required.\n\nRead/Write Access:         -f\nNetwork Access:            -n\nExecution Access:          -e\nUI Access:                 -ui\nFile Manager:              -fm\nClipboard Access:              -cb\n\nUsage 1: sandboxa <filepath> <filename> <flag>\nYou can also combine flags.");
-
+                //Console.WriteLine("\nSandboxa Help Screen\n---------------------------------------------------------------\nBy default all permissions are disabled. Use flags as required.\n\nRead/Write Access:         -f\nNetwork Access:            -n\nExecution Access:          -e\nUI Access:                 -ui\nFile Manager:              -fm\nClipboard Access:              -cb\n\nUsage 1: sandboxa <filepath> <filename> <flag>\nYou can also combine flags.");
+                Console.WriteLine("\nSandboxa Help Screen\n---------------------------------------------------------------\nBy default all permissions are disabled. Use flags as required.\nPermissions\tFlags\t\t\tDescription\n");
+                Console.WriteLine("Execution\t-f\t\t\tgrant program permission to run on your pc");
+                Console.WriteLine("File\t\t-n\t\t\tgrant permission to give access to read and write to your files");
+                Console.WriteLine("Network\t\t-n\t\t\tgrant network/internet access");
+                Console.WriteLine("User Interface\t-ui\t\t\tgrant permission to launch a GUI app");
+                Console.WriteLine("File dialog\t-fd\t\t\tgrant permission to open a file dialog");
             }
             else if (args[0].ToLower().Contains("start."))
             {
@@ -82,7 +87,7 @@ namespace Sandboxa
                 {
                     permSet.AddPermission(new UIPermission(PermissionState.Unrestricted));
                 }
-                if (flags.Contains("fm"))
+                if (flags.Contains("fd"))
                 {
 
                     permSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.Open));
@@ -141,19 +146,19 @@ namespace Sandboxa
                 //Console.WriteLine(item);
                 switch (item.ToLower())
                 {
-                    case "execution":
+                    case "execution access":
                         permSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
                         break;
-                    case "file":
+                    case "file access":
                         permSet.AddPermission(new FileIOPermission((PermissionState)FileIOPermissionAccess.Read));
                         break;
-                    case "network":
+                    case "network access":
                         permSet.AddPermission(new WebPermission(PermissionState.Unrestricted));
                         break;
-                    case "user interface":
+                    case "user interface access":
                         permSet.AddPermission(new UIPermission(PermissionState.Unrestricted));
                         break;
-                    case "file dialog":
+                    case "file dialog access":
                         permSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.OpenSave));
                         break;
                     //case "fm2":
@@ -186,6 +191,7 @@ namespace Sandboxa
             }
             catch (FileNotFoundException ex)
             {
+                Console.WriteLine(ex);
                 Console.WriteLine("Program not found. Please check and correct.");
                 MessageBox.Show("Program not found. Please check and correct.");
             }

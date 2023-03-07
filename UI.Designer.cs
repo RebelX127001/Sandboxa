@@ -90,11 +90,11 @@
             // 
             this.permList.FormattingEnabled = true;
             this.permList.Items.AddRange(new object[] {
-            "Execution",
-            "File",
-            "Network",
-            "User Interface",
-            "File dialog"});
+            "Execution Access",
+            "File Access",
+            "Network Access",
+            "User Interface Access",
+            "File Dialog Access"});
             this.permList.Location = new System.Drawing.Point(85, 198);
             this.permList.Name = "permList";
             this.permList.Size = new System.Drawing.Size(120, 94);

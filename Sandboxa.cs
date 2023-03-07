@@ -44,33 +44,37 @@ namespace Sandboxa
                 Object retVal = target.Invoke(null, null);
 
             }
+            //catch (Exception ex)
+            //{
+            //    new PermissionSet(PermissionState.Unrestricted).Assert();
+            //    if (ex.ToString().Contains("System.Security.Permissions.FileIOPermission"))
+            //    {
+            //        Console.WriteLine("File access permission required. Use required permission flags or sandboxa /? for manual.");
+            //        MessageBox.Show("File access permission required. Use required permission flags or sandboxa /? for manual.");
+            //    }
+            //    //else if (ex.ToString().Contains("Request for the permission of type 'System.Net.WebPermission"))
+            //    //{
+            //    //    Console.WriteLine("Network permission required. Please use required permission flags.");
+            //    //    MessageBox.Show("Network permission required. Please use required permission flags.");
+            //    //}
+            //    else if (ex.ToString().Contains("Request for the permission of type 'System.Security.Permissions.UIPermission"))
+            //    {
+            //        Console.WriteLine("UI permission required. Please use required permission flags.");
+            //        MessageBox.Show("UI permission required. Please use required permission flags.");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
+            //        //Console.WriteLine("Permission Denied. Please use required permission flags.");
+            //        CodeAccessPermission.RevertAssert();
+
+            //    }
+            //}
+
             catch (Exception ex)
             {
-                new PermissionSet(PermissionState.Unrestricted).Assert();
-                if (ex.ToString().Contains("System.Security.Permissions.FileIOPermission"))
-                {
-                    Console.WriteLine("File access permission required. Use required permission flags or sandboxa /? for manual.");
-                    MessageBox.Show("File access permission required. Use required permission flags or sandboxa /? for manual.");
-                }
-                else if (ex.ToString().Contains("Request for the permission of type 'System.Net.WebPermission"))
-                {
-                    Console.WriteLine("Network permission required. Please use required permission flags.");
-                    MessageBox.Show("Network permission required. Please use required permission flags.");
-                }
-                else if (ex.ToString().Contains("Request for the permission of type 'System.Security.Permissions.UIPermission"))
-                {
-                    Console.WriteLine("UI permission required. Please use required permission flags.");
-                    MessageBox.Show("UI permission required. Please use required permission flags.");
-                }
-                else
-                {
-                    Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
-                    //Console.WriteLine("Permission Denied. Please use required permission flags.");
-                    CodeAccessPermission.RevertAssert();
-
-                }
+                Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
             }
-
         }
     }
 }
