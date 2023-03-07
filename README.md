@@ -20,7 +20,7 @@ A step by step series of examples that tell you how to get a development environ
 
 shell
 
-$ git clone https://github.com/<username>/<project>.git
+$ git clone https://github.com/RebelX127001/Sandboxa.git
     
 $ mv <project> <visul studio repo directory>
 
