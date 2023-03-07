@@ -1,6 +1,6 @@
 # Sandboxa
 
-A simple Sandboxing tool for running untrusted program in.
+A simple Sandboxing tool for running untrusted programs.
 
 Getting Started
 
@@ -21,6 +21,7 @@ A step by step series of examples that tell you how to get a development environ
 shell
 
 $ git clone https://github.com/<username>/<project>.git
+    
 $ mv <project> <visul studio repo directory>
 
 
@@ -52,4 +53,5 @@ FOR USAGE ON A TERMINAL
     You can also combine flags.
     
 FOR USAGE VIA GUI
+    
     $sandboxa start.  --Launches the GUI version of Sandboxa
