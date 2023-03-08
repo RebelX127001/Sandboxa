@@ -36,10 +36,9 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.exeName = new System.Windows.Forms.TextBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -125,6 +124,17 @@
             this.exeName.Size = new System.Drawing.Size(121, 20);
             this.exeName.TabIndex = 11;
             // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(205, 222);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(81, 17);
+            this.checkBox2.TabIndex = 14;
+            this.checkBox2.Text = "Deselect all";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(452, 105);
@@ -139,22 +149,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(205, 222);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(81, 17);
-            this.checkBox2.TabIndex = 14;
-            this.checkBox2.Text = "Deselect all";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
-            // openFileDialog2
-            // 
-            this.openFileDialog2.FileName = "openFileDialog2";
-            this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog2_FileOk);
             // 
             // UI
             // 
@@ -189,9 +183,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox exeName;
+        private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }

@@ -21,7 +21,7 @@ namespace Sandboxa
 {
     public class Sandboxa : MarshalByRefObject
     {
-
+        [STAThread]//NECESSARY FOR file dialog pop up
         public static void Main(string [] args)
         {
             Program program = new Program();

@@ -98,21 +98,25 @@ namespace Sandboxa
 
         private void button2_Click_2(object sender, EventArgs e)
         {
-            // Create a new instance of the OpenFileDialog class
             OpenFileDialog ofd = new OpenFileDialog();
 
-            // Set the filter to only show text files
-            //openFileDialog1.Filter = "Text Files (*.txt)|*.txt";
-
-            // Show the dialog box and wait for the user to select a file
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                // Get the selected file name
                 string fileName = ofd.FileName;
+                Console.WriteLine(fileName);
 
-                // Do something with the selected file
-                // For example, display the file in a text box
-                exePath.Text = File.ReadAllText(fileName);
+                // Extract the app name
+                string appName = Path.GetFileName(exePath.Text);
+
+                // Extract the file path without the app name
+                string filePathWithoutApp = Path.GetDirectoryName(exePath.Text);
+
+                // Extract the app name without the ".exe" extension
+                string appNameWithoutExtension = Path.GetFileNameWithoutExtension(appName);
+
+
+                exePath.Text = filePathWithoutApp;
+                exeName.Text = appNameWithoutExtension;
             }
 
         }
