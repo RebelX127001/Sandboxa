@@ -29,13 +29,17 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.exePath = new System.Windows.Forms.TextBox();
-            this.exeName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.permList = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.exeName = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -48,43 +52,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFIle";
-            // 
             // exePath
             // 
             this.exePath.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.exePath.Location = new System.Drawing.Point(82, 106);
+            this.exePath.Location = new System.Drawing.Point(82, 105);
             this.exePath.Name = "exePath";
             this.exePath.Size = new System.Drawing.Size(355, 20);
             this.exePath.TabIndex = 2;
             this.exePath.TextChanged += new System.EventHandler(this.exePath_TextChanged);
             // 
-            // exeName
-            // 
-            this.exeName.Location = new System.Drawing.Point(518, 106);
-            this.exeName.Name = "exeName";
-            this.exeName.Size = new System.Drawing.Size(121, 20);
-            this.exeName.TabIndex = 3;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(82, 87);
+            this.label1.Location = new System.Drawing.Point(82, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "/path to executable";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(517, 87);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "/name of executable";
             // 
             // permList
             // 
@@ -94,32 +78,97 @@
             "File Access",
             "Network Access",
             "User Interface Access",
-            "File Dialog Access"});
-            this.permList.Location = new System.Drawing.Point(85, 198);
+            "File Dialog Access",
+            "Reflection Access",
+            "Environment Access",
+            "Strong Name Access",
+            "Isolated Storage"});
+            this.permList.Location = new System.Drawing.Point(85, 241);
             this.permList.Name = "permList";
-            this.permList.Size = new System.Drawing.Size(120, 94);
+            this.permList.Size = new System.Drawing.Size(188, 139);
             this.permList.TabIndex = 6;
             this.permList.SelectedIndexChanged += new System.EventHandler(this.permList_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(82, 183);
+            this.label3.Location = new System.Drawing.Point(82, 200);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "/permissions";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(83, 222);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(69, 17);
+            this.checkBox1.TabIndex = 10;
+            this.checkBox1.Text = "Select all";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(84, 139);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "/name of executable";
+            // 
+            // exeName
+            // 
+            this.exeName.Location = new System.Drawing.Point(85, 158);
+            this.exeName.Name = "exeName";
+            this.exeName.Size = new System.Drawing.Size(121, 20);
+            this.exeName.TabIndex = 11;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(452, 105);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(35, 20);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "...";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(205, 222);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(81, 17);
+            this.checkBox2.TabIndex = 14;
+            this.checkBox2.Text = "Deselect all";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog2_FileOk);
+            // 
             // UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(535, 450);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.exeName);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.permList);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.exeName);
             this.Controls.Add(this.exePath);
             this.Controls.Add(this.button1);
             this.Name = "UI";
@@ -133,12 +182,16 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox exePath;
-        private System.Windows.Forms.TextBox exeName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckedListBox permList;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox exeName;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }

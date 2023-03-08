@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Sandboxa
@@ -40,18 +41,22 @@ namespace Sandboxa
             string pathToUntrusted = exePath.Text;
             
             string untrustedAssembly = exeName.Text;
-
-
-
-            foreach (var item in permList.CheckedItems)
+            if (pathToUntrusted == "" || untrustedAssembly == "")
             {
-                program.selectedItems.Add(item.ToString());
+                Console.WriteLine("Field cannot be empty");
+                MessageBox.Show("Field cannot be empty");
             }
+            else
+            {
+                foreach (var item in permList.CheckedItems)
+                {
+                    program.selectedItems.Add(item.ToString());
+                }
 
-            program.UiAppDomain(pathToUntrusted, untrustedAssembly, null, null);
-            //sandboxa.ExecuteUntrustedCode(untrustedAssembly, null, null);
-;            //Console.WriteLine (path + namechat
+                program.UiAppDomain(pathToUntrusted, untrustedAssembly, null, null);
+            }
         }
+
 
         private void UI_Load(object sender, EventArgs e)
         {
@@ -59,6 +64,60 @@ namespace Sandboxa
         }
 
         private void permList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < permList.Items.Count; i++)
+            {
+                permList.SetItemChecked(i, true);
+
+            }
+        }
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+            for (int i = 0; i < permList.Items.Count; i++)
+            {
+                permList.SetItemChecked(i, false);
+
+            }
+
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            // Create a new instance of the OpenFileDialog class
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            // Set the filter to only show text files
+            //openFileDialog1.Filter = "Text Files (*.txt)|*.txt";
+
+            // Show the dialog box and wait for the user to select a file
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                // Get the selected file name
+                string fileName = ofd.FileName;
+
+                // Do something with the selected file
+                // For example, display the file in a text box
+                exePath.Text = File.ReadAllText(fileName);
+            }
+
+        }
+
+        private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
         {
 
         }

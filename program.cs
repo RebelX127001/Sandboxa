@@ -27,7 +27,8 @@ namespace Sandboxa
 
         static string untrustedClass;
         static string entryPoint;
-        //private static Object[] parameters = { 45 };
+
+        Object[] parameters = { };
         public static string[] args { get; set; }
 
         public void consoleAppDomain( string[] args)
@@ -43,11 +44,15 @@ namespace Sandboxa
 
                 //Console.WriteLine("\nSandboxa Help Screen\n---------------------------------------------------------------\nBy default all permissions are disabled. Use flags as required.\n\nRead/Write Access:         -f\nNetwork Access:            -n\nExecution Access:          -e\nUI Access:                 -ui\nFile Manager:              -fm\nClipboard Access:              -cb\n\nUsage 1: sandboxa <filepath> <filename> <flag>\nYou can also combine flags.");
                 Console.WriteLine("\nSandboxa Help Screen\n---------------------------------------------------------------\nBy default all permissions are disabled. Use flags as required.\nPermissions\tFlags\t\t\tDescription\n");
-                Console.WriteLine("Execution\t-f\t\t\tgrant program permission to run on your pc");
-                Console.WriteLine("File\t\t-n\t\t\tgrant permission to give access to read and write to your files");
-                Console.WriteLine("Network\t\t-n\t\t\tgrant network/internet access");
-                Console.WriteLine("User Interface\t-ui\t\t\tgrant permission to launch a GUI app");
-                Console.WriteLine("File dialog\t-fd\t\t\tgrant permission to open a file dialog");
+                Console.WriteLine("Execution Access\t-f\t\t\tgrant program permission to run on your pc");
+                Console.WriteLine("File Access\t\t-n\t\t\tgrant permission to give access to read and write to your files");
+                Console.WriteLine("Network Access\t\t-n\t\t\tgrant network/internet access");
+                Console.WriteLine("User Interface Access\t-ui\t\t\tgrant permission to launch a GUI app");
+                Console.WriteLine("File dialog Access\t-fd\t\t\tgrant permission to open a file dialog");
+                Console.WriteLine("Reflection Access\t-r\t\t\tgrant permission to enable reflection");
+                Console.WriteLine("Environment Access\t-env\t\t\tgrant permission to edit environment variables");
+                Console.WriteLine("Strong Name Access\t-sn\t\t\tgrant permission for Strong Naming");
+                Console.WriteLine("Isolated Storage Access\t-is\t\t\tgrant permission for Isolated Storage Access");
             }
             else if (args[0].ToLower().Contains("start."))
             {
@@ -89,12 +94,23 @@ namespace Sandboxa
                 }
                 if (flags.Contains("fd"))
                 {
-
-                    permSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.Open));
+                    permSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.OpenSave));
                 }
-                if (flags.Contains("fm2"))
+                if (flags.Contains("r"))
                 {
-                    permSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.Save));
+                    permSet.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
+                }
+                if (flags.Contains("env"))
+                {
+                    permSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Read));
+                }
+                if (flags.Contains("sn"))
+                {
+                    permSet.AddPermission(new StrongNameIdentityPermission(PermissionState.Unrestricted));
+                }
+                if (flags.Contains("is"))
+                {
+                    permSet.AddPermission(new IsolatedStorageFilePermission(PermissionState.Unrestricted));
                 }
                 StrongName fullTrustAssembly = typeof(Sandboxa).Assembly.Evidence.GetHostEvidence<StrongName>();
 
@@ -107,18 +123,27 @@ namespace Sandboxa
                 Sandboxa newDomainInstance = (Sandboxa)handle.Unwrap();
                 try
                 {
-                    newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, untrustedClass, entryPoint);
+                    //Console.WriteLine(parameters.GetType().ToString());
+                    newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, untrustedClass, entryPoint, parameters);
                 }
                 catch (FileLoadException ex)
                 {
                     Console.WriteLine("Execution permission required. Please use required permission flags.");
+                    MessageBox.Show("Execution permission required. Please use required permission flags.");
                     Console.WriteLine(ex);
 
                 }
                 catch (FileNotFoundException ex)
                 {
                     Console.WriteLine("Program not found. Please check and correct.");
+                    MessageBox.Show("Program not found. Please check and correct.");
                     Console.WriteLine(ex);
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
+                    MessageBox.Show("SecurityException caught:\n{0}", ex.ToString());
                 }
             }
             else
@@ -161,6 +186,18 @@ namespace Sandboxa
                     case "file dialog access":
                         permSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.OpenSave));
                         break;
+                    case "reflection access":
+                        permSet.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
+                        break;
+                    case "environment access":
+                        permSet.AddPermission(new EnvironmentPermission((PermissionState)EnvironmentPermissionAccess.Read));
+                        break;
+                    case "strong name access":
+                        permSet.AddPermission(new StrongNameIdentityPermission(PermissionState.Unrestricted));
+                        break;
+                    case "isolated storage access":
+                        permSet.AddPermission(new IsolatedStorageFilePermission(PermissionState.Unrestricted));
+                        break;
                     //case "fm2":
                     //    permSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.Save));
                     //    break;
@@ -181,7 +218,7 @@ namespace Sandboxa
             Sandboxa newDomainInstance = (Sandboxa)handle.Unwrap();
             try
             {
-                newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, untrustedClass, entryPoint);
+                newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, untrustedClass, entryPoint, parameters);
             }
             catch (FileLoadException ex)
             {
