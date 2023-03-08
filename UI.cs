@@ -106,10 +106,10 @@ namespace Sandboxa
                 Console.WriteLine(fileName);
 
                 // Extract the app name
-                string appName = Path.GetFileName(exePath.Text);
+                string appName = Path.GetFileName(fileName);
 
                 // Extract the file path without the app name
-                string filePathWithoutApp = Path.GetDirectoryName(exePath.Text);
+                string filePathWithoutApp = Path.GetDirectoryName(fileName);
 
                 // Extract the app name without the ".exe" extension
                 string appNameWithoutExtension = Path.GetFileNameWithoutExtension(appName);
