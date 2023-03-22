@@ -26,7 +26,7 @@ namespace Sandboxa
         {
             Program program = new Program();
             program.consoleAppDomain(args);
-            Console.ReadLine();
+            //Console.ReadLine();
         }
         public void ExecuteUntrustedCode(string assemblyName, string typeName, string entryPoint, Object[] parameters)
         {
@@ -53,9 +53,9 @@ namespace Sandboxa
                 new PermissionSet(PermissionState.Unrestricted).Assert();
                 if (ex.ToString().Contains("System.Security.Permissions.FileIOPermission"))
                 {
-                    Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
-                    //Console.WriteLine("File access permission required. Use required permission flags or sandboxa /? for manual.");
-                    //MessageBox.Show("File access permission required. Use required permission flags or sandboxa /? for manual.");
+                    //Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
+                    Console.WriteLine("File access permission required. Use required permission flags or sandboxa /? for manual.");
+                    MessageBox.Show("File access permission required. Use required permission flags or sandboxa /? for manual.");
                 }
                 else if (ex.ToString().Contains("Request for the permission of type 'System.Net.WebPermission"))
                 {

@@ -43,16 +43,17 @@ namespace Sandboxa
             {
 
                 //Console.WriteLine("\nSandboxa Help Screen\n---------------------------------------------------------------\nBy default all permissions are disabled. Use flags as required.\n\nRead/Write Access:         -f\nNetwork Access:            -n\nExecution Access:          -e\nUI Access:                 -ui\nFile Manager:              -fm\nClipboard Access:              -cb\n\nUsage 1: sandboxa <filepath> <filename> <flag>\nYou can also combine flags.");
-                Console.WriteLine("\nSandboxa Help Screen\n---------------------------------------------------------------\nBy default all permissions are disabled. Use flags as required.\nPermissions\tFlags\t\t\tDescription\n");
-                Console.WriteLine("Execution Access\t-f\t\t\tgrant program permission to run on your pc");
-                Console.WriteLine("File Access\t\t-n\t\t\tgrant permission to give access to read and write to your files");
-                Console.WriteLine("Network Access\t\t-n\t\t\tgrant network/internet access");
-                Console.WriteLine("User Interface Access\t-ui\t\t\tgrant permission to launch a GUI app");
-                Console.WriteLine("File dialog Access\t-fd\t\t\tgrant permission to open a file dialog");
-                Console.WriteLine("Reflection Access\t-r\t\t\tgrant permission to enable reflection");
-                Console.WriteLine("Environment Access\t-env\t\t\tgrant permission to edit environment variables");
-                Console.WriteLine("Strong Name Access\t-sn\t\t\tgrant permission for Strong Naming");
-                Console.WriteLine("Isolated Storage Access\t-is\t\t\tgrant permission for Isolated Storage Access");
+                Console.WriteLine("\nSandboxa Help Screen\n---------------------------------------------------------------\nBy default all permissions are disabled. Use flags as required.\nPermissions\t\t\tFlags\t\t\tDescription\n");
+                Console.WriteLine("Execution Access\t\t-f\t\t\tgrant program permission to run on your pc");
+                Console.WriteLine("File Access\t\t\t-n\t\t\tgrant permission to give access to read and write to your files");
+                Console.WriteLine("Network Access\t\t\t-n\t\t\tgrant network/internet access");
+                Console.WriteLine("User Interface Access\t\t-ui\t\t\tgrant permission to launch a GUI app");
+                Console.WriteLine("File dialog Access\t\t-fd\t\t\tgrant permission to open a file dialog");
+                Console.WriteLine("Reflection Access\t\t-r\t\t\tgrant permission to enable reflection");
+                Console.WriteLine("Environment Access\t\t-env\t\t\tgrant permission to edit environment variables");
+                Console.WriteLine("Strong Name Access\t\t-sn\t\t\tgrant permission for Strong Naming");
+                Console.WriteLine("Isolated Storage Access\t\t-is\t\t\tgrant permission for Isolated Storage Access");
+                Console.WriteLine("\nUsage: sandboxa <assemblypath> <assemblyname> <flags>");
             }
             else if (args[0].ToLower().Contains("start."))
             {
@@ -79,6 +80,7 @@ namespace Sandboxa
                 if (flags.Contains("e"))
                 {
                     permSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
+                    permSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.AllFlags));
                 }
                 if (flags.Contains("f"))
                 {
@@ -91,6 +93,7 @@ namespace Sandboxa
                 if (flags.Contains("ui"))
                 {
                     permSet.AddPermission(new UIPermission(PermissionState.Unrestricted));
+                    permSet.AddPermission(new UIPermission(UIPermissionWindow.SafeTopLevelWindows));
                 }
                 if (flags.Contains("fd"))
                 {
@@ -130,14 +133,14 @@ namespace Sandboxa
                 {
                     Console.WriteLine("Execution permission required. Please use required permission flags.");
                     MessageBox.Show("Execution permission required. Please use required permission flags.");
-                    Console.WriteLine(ex);
+                    //Console.WriteLine(ex);
 
                 }
                 catch (FileNotFoundException ex)
                 {
                     Console.WriteLine("Program not found. Please check and correct.");
                     MessageBox.Show("Program not found. Please check and correct.");
-                    Console.WriteLine(ex);
+                    //Console.WriteLine(ex);
                 }
 
                 catch (Exception ex)
@@ -182,6 +185,7 @@ namespace Sandboxa
                         break;
                     case "user interface access":
                         permSet.AddPermission(new UIPermission(PermissionState.Unrestricted));
+                        permSet.AddPermission(new UIPermission(UIPermissionWindow.SafeTopLevelWindows));
                         break;
                     case "file dialog access":
                         permSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.OpenSave));
@@ -202,7 +206,6 @@ namespace Sandboxa
                     //    permSet.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.Save));
                     //    break;
                     default:
-                        // Handle invalid items
                         break;
                 }
             }
@@ -228,7 +231,7 @@ namespace Sandboxa
             }
             catch (FileNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                //Console.WriteLine(ex);
                 Console.WriteLine("Program not found. Please check and correct.");
                 MessageBox.Show("Program not found. Please check and correct.");
             }
