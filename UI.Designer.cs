@@ -39,6 +39,11 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.fileNameLabel = new System.Windows.Forms.Label();
+            this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -151,11 +156,60 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(12, 33);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(722, 406);
+            this.listView1.TabIndex = 15;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(29, 4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(28, 23);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "<-";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(686, 4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(28, 23);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "->";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // fileNameLabel
+            // 
+            this.fileNameLabel.AutoSize = true;
+            this.fileNameLabel.Location = new System.Drawing.Point(29, 458);
+            this.fileNameLabel.Name = "fileNameLabel";
+            this.fileNameLabel.Size = new System.Drawing.Size(16, 13);
+            this.fileNameLabel.TabIndex = 18;
+            this.fileNameLabel.Text = "...";
+            // 
+            // filePathTextBox
+            // 
+            this.filePathTextBox.Location = new System.Drawing.Point(77, 7);
+            this.filePathTextBox.Name = "filePathTextBox";
+            this.filePathTextBox.Size = new System.Drawing.Size(591, 20);
+            this.filePathTextBox.TabIndex = 19;
+            // 
             // UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 567);
+            this.Controls.Add(this.filePathTextBox);
+            this.Controls.Add(this.fileNameLabel);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
@@ -166,7 +220,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exePath);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sandboxa";
             this.Load += new System.EventHandler(this.UI_Load);
             this.ResumeLayout(false);
@@ -187,5 +243,10 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label fileNameLabel;
+        private System.Windows.Forms.TextBox filePathTextBox;
     }
 }
