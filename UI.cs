@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
+using System.Diagnostics;
 
 namespace Sandboxa
 {
@@ -25,17 +26,17 @@ namespace Sandboxa
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
+        //private void button2_Click(object sender, EventArgs e)
+        //{
 
-            OpenFileDialog openFIle = new OpenFileDialog();
+        //    OpenFileDialog openFIle = new OpenFileDialog();
 
-            if (openFIle.ShowDialog() == DialogResult.OK)
-            {
-                string filePath = openFIle.FileName;
-                Console.WriteLine(filePath); // or use any other method to print the file path
-            }
-        }
+        //    if (openFIle.ShowDialog() == DialogResult.OK)
+        //    {
+        //        string filePath = openFIle.FileName;
+        //        Console.WriteLine(filePath); // or use any other method to print the file path
+        //    }
+        //}
 
         private void exePath_TextChanged(object sender, EventArgs e)
         {
@@ -159,6 +160,54 @@ namespace Sandboxa
             {
             }
         }
+        public void loadFileDetails()
+        { 
+            string tempFilePath = "";
+            FileAttributes fileAttr;
+            try
+            {
+                if (isFile)
+                {
+                    tempFilePath = filePath + "\\" + currentlySelectedItemName;
+                    FileInfo fileDetails = new FileInfo(tempFilePath);
+                    fileNameLabel.Text = fileDetails.Name;
+                    fileTypeLabel.Text = fileDetails.Extension;
+
+                    fileTypeLabel.Text = fileDetails.Extension;
+                    long fileSizeInBytes = fileDetails.Length;
+                    double fileSizeInKB = fileSizeInBytes / 1024.0;
+                    double fileSizeInMB = fileSizeInKB / 1024.0;
+
+                    if (fileSizeInMB >= 1)
+                    {
+                        fileSizeLabel.Text = fileSizeInMB.ToString("0.00") + " MB";
+                    }
+                    else if (fileSizeInKB >= 1)
+                    {
+                        fileSizeLabel.Text = fileSizeInKB.ToString("0.00") + " KB";
+                    }
+                    else
+                    {
+                        fileSizeLabel.Text = fileSizeInBytes.ToString() + " bytes";
+                    }
+
+                    fileAttr = System.IO.File.GetAttributes(tempFilePath);
+                    FileInfo file = new FileInfo(tempFilePath);
+                    string fileExtension = file.Extension.ToLower();
+                }
+                else
+                {
+                    fileAttr = System.IO.File.GetAttributes(filePath);
+
+
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
         private void permList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -185,6 +234,32 @@ namespace Sandboxa
 
             }
 
+        }
+
+        public void loadButonAction()
+        {
+            removeBackSlash();
+            filePath = filePathTextBox.Text;
+            if (filePath.ToLower() == "cmd")
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.WorkingDirectory = cmdDir;
+                process.Start();
+            }
+            loadFileAndDirectories();
+            isFile = false;
+
+        }
+
+        //remove additional and inadvertently added backslash
+        public void removeBackSlash()
+        {
+            string path = filePathTextBox.Text;
+            if (path.LastIndexOf("\\") == path.Length - 1)
+            {
+                filePathTextBox.Text = path.Substring(0, path.Length - 1);
+            }
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -217,6 +292,23 @@ namespace Sandboxa
 
         }
 
+        public void goBack()
+        {
+            try
+            {
+                removeBackSlash();
+                string path = filePathTextBox.Text;
+                path = path.Substring(0, path.LastIndexOf("\\"));
+                this.isFile = false;
+                filePathTextBox.Text = path;
+                removeBackSlash();
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
         private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
         {
 
@@ -230,6 +322,44 @@ namespace Sandboxa
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            loadButonAction();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            goBack();
+            loadButonAction();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            loadButonAction();
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            //loadFileDetails();
+        }
+
+        private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+
+            currentlySelectedItemName = e.Item.Text;
+            FileAttributes fileAttr = System.IO.File.GetAttributes(filePath + "\\" + currentlySelectedItemName);
+            if ((fileAttr & FileAttributes.Directory) == FileAttributes.Directory)
+            {
+                isFile = false;
+                filePathTextBox.Text = filePath + "\\" + currentlySelectedItemName;
+            }
+            else
+            {
+                isFile = true;
+
+            }
         }
     }
 }

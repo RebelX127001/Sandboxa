@@ -44,11 +44,13 @@
             this.button4 = new System.Windows.Forms.Button();
             this.fileNameLabel = new System.Windows.Forms.Label();
             this.filePathTextBox = new System.Windows.Forms.TextBox();
+            this.fileTypeLabel = new System.Windows.Forms.Label();
+            this.fileSizeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(848, 404);
+            this.button1.Location = new System.Drawing.Point(758, 415);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(123, 35);
             this.button1.TabIndex = 0;
@@ -87,7 +89,7 @@
             "Environment Access",
             "Strong Name Access",
             "Isolated Storage"});
-            this.permList.Location = new System.Drawing.Point(805, 241);
+            this.permList.Location = new System.Drawing.Point(758, 236);
             this.permList.Name = "permList";
             this.permList.Size = new System.Drawing.Size(188, 139);
             this.permList.TabIndex = 6;
@@ -96,7 +98,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(802, 200);
+            this.label3.Location = new System.Drawing.Point(755, 195);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 13);
             this.label3.TabIndex = 7;
@@ -106,7 +108,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(803, 222);
+            this.checkBox1.Location = new System.Drawing.Point(756, 217);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(69, 17);
             this.checkBox1.TabIndex = 10;
@@ -133,7 +135,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(925, 222);
+            this.checkBox2.Location = new System.Drawing.Point(878, 217);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(81, 17);
             this.checkBox2.TabIndex = 14;
@@ -159,35 +161,40 @@
             // listView1
             // 
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(12, 33);
+            this.listView1.Location = new System.Drawing.Point(12, 44);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(722, 406);
+            this.listView1.Size = new System.Drawing.Size(722, 460);
             this.listView1.TabIndex = 15;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView1_ItemSelectionChanged);
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(29, 4);
+            this.button3.Location = new System.Drawing.Point(29, 11);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(28, 23);
             this.button3.TabIndex = 16;
             this.button3.Text = "<-";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(686, 4);
+            this.button4.Location = new System.Drawing.Point(686, 11);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(28, 23);
             this.button4.TabIndex = 17;
             this.button4.Text = "->";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // fileNameLabel
             // 
             this.fileNameLabel.AutoSize = true;
-            this.fileNameLabel.Location = new System.Drawing.Point(29, 458);
+            this.fileNameLabel.Location = new System.Drawing.Point(29, 507);
             this.fileNameLabel.Name = "fileNameLabel";
             this.fileNameLabel.Size = new System.Drawing.Size(16, 13);
             this.fileNameLabel.TabIndex = 18;
@@ -195,16 +202,36 @@
             // 
             // filePathTextBox
             // 
-            this.filePathTextBox.Location = new System.Drawing.Point(77, 7);
+            this.filePathTextBox.Location = new System.Drawing.Point(77, 14);
             this.filePathTextBox.Name = "filePathTextBox";
             this.filePathTextBox.Size = new System.Drawing.Size(591, 20);
             this.filePathTextBox.TabIndex = 19;
+            // 
+            // fileTypeLabel
+            // 
+            this.fileTypeLabel.AutoSize = true;
+            this.fileTypeLabel.Location = new System.Drawing.Point(286, 507);
+            this.fileTypeLabel.Name = "fileTypeLabel";
+            this.fileTypeLabel.Size = new System.Drawing.Size(16, 13);
+            this.fileTypeLabel.TabIndex = 20;
+            this.fileTypeLabel.Text = "...";
+            // 
+            // fileSizeLabel
+            // 
+            this.fileSizeLabel.AutoSize = true;
+            this.fileSizeLabel.Location = new System.Drawing.Point(589, 507);
+            this.fileSizeLabel.Name = "fileSizeLabel";
+            this.fileSizeLabel.Size = new System.Drawing.Size(16, 13);
+            this.fileSizeLabel.TabIndex = 21;
+            this.fileSizeLabel.Text = "...";
             // 
             // UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 567);
+            this.Controls.Add(this.fileSizeLabel);
+            this.Controls.Add(this.fileTypeLabel);
             this.Controls.Add(this.filePathTextBox);
             this.Controls.Add(this.fileNameLabel);
             this.Controls.Add(this.button4);
@@ -248,5 +275,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label fileNameLabel;
         private System.Windows.Forms.TextBox filePathTextBox;
+        private System.Windows.Forms.Label fileTypeLabel;
+        private System.Windows.Forms.Label fileSizeLabel;
     }
 }

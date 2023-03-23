@@ -33,6 +33,9 @@ namespace Sandboxa
 
         public void consoleAppDomain( string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new UI());
             if (args.Length == 0)
             {
                 Console.WriteLine("\nFor more information on how to use, type Sanboxa /? or Sandboxa Start. to launch GUI.");
