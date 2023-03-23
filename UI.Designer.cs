@@ -60,6 +60,7 @@
             // 
             // exePath
             // 
+            this.exePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.exePath.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.exePath.Location = new System.Drawing.Point(753, 73);
             this.exePath.Name = "exePath";
@@ -89,7 +90,7 @@
             "Environment Access",
             "Strong Name Access",
             "Isolated Storage"});
-            this.permList.Location = new System.Drawing.Point(758, 236);
+            this.permList.Location = new System.Drawing.Point(758, 240);
             this.permList.Name = "permList";
             this.permList.Size = new System.Drawing.Size(188, 139);
             this.permList.TabIndex = 6;
@@ -98,17 +99,18 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(755, 195);
+            this.label3.Font = new System.Drawing.Font("Lucida Fax", 8F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(755, 199);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 13);
+            this.label3.Size = new System.Drawing.Size(99, 14);
             this.label3.TabIndex = 7;
-            this.label3.Text = "/permissions";
+            this.label3.Text = "Permission List";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(756, 217);
+            this.checkBox1.Location = new System.Drawing.Point(756, 221);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(69, 17);
             this.checkBox1.TabIndex = 10;
@@ -127,6 +129,7 @@
             // 
             // exeName
             // 
+            this.exeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.exeName.Location = new System.Drawing.Point(756, 126);
             this.exeName.Name = "exeName";
             this.exeName.Size = new System.Drawing.Size(121, 20);
@@ -135,7 +138,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(878, 217);
+            this.checkBox2.Location = new System.Drawing.Point(878, 221);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(81, 17);
             this.checkBox2.TabIndex = 14;
@@ -160,6 +163,7 @@
             // 
             // listView1
             // 
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(12, 44);
             this.listView1.Name = "listView1";

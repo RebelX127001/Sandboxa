@@ -342,7 +342,7 @@ namespace Sandboxa
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            //loadFileDetails();
+            loadFileDetails();
         }
 
         private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
