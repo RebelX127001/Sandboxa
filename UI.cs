@@ -88,6 +88,8 @@ namespace Sandboxa
                     fileAttr = System.IO.File.GetAttributes(tempFilePath);
                     FileInfo file = new FileInfo(tempFilePath);
                     string fileExtension = file.Extension.ToLower();
+                    exePath.Text = filePath;
+                    exeName.Text = Path.GetFileNameWithoutExtension(fileDetails.Name);
                 }
                 else
                 {
