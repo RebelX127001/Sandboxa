@@ -127,6 +127,7 @@ namespace Sandboxa
                     typeof(Sandboxa).FullName
                     );
                 Sandboxa newDomainInstance = (Sandboxa)handle.Unwrap();
+                //Exception handling
                 try
                 {
                     //Console.WriteLine(parameters.GetType().ToString());
